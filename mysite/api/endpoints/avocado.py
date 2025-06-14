@@ -29,34 +29,6 @@ async def get_db():
         db.close()
 
 
-# @avocado_router.post('/predict/')
-# async def predict(avocado: PredictSchema, db: Session = Depends(get_db)):
-#     avocado_dict = avocado.dict()
-#     color = avocado_dict.pop('color_category')
-#
-#     color_0_or_1 = [
-#         1 if color == 'dark green' else 0,
-#         1 if color == 'green' else 0,
-#         1 if color == 'purple' else 0,
-#     ]
-#
-#     features = list(avocado_dict.values()) + color_0_or_1
-#     scaled = scaler.transform([features])
-#     prediction = model.predict(scaled)[0]
-#     probability = model.predict_proba(scaled)
-#
-#     class_labels = ["hard", "pre-conditioned", "breaking", "firm-ripe", "ripe"]
-#
-#     probabilities = {
-#         label: round(float(prob), 2)
-#         for label, prob in zip(class_labels, probability)
-#     }
-#
-#     return {
-#         'predicted_ripeness': prediction,
-#         'probabilities': probabilities
-#     }
-
 @avocado_router.post('/predict/')
 async def predict(avocado: PredictSchema):
     avocado_dict = avocado.dict()
